@@ -1,3 +1,33 @@
+server:
+  port: 8085
+  compression:
+    enabled: true
+
+
 spring:
   application:
     name: spring-boot-ci-cd-setup
+  jpa:
+    show-sql: false
+    properties:
+      hibernate:
+        show_sql: false
+        format_sql: false
+
+
+
+management:
+  info:
+    build:
+      enabled: true
+    defaults:
+      enabled: true
+    env:
+      enabled: true
+    git:
+      enabled: true
+      mode: full
+    java:
+      enabled: true
+    os:
+      enabled: false

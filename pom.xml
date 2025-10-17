@@ -1,339 +1,562 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.5.6</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
-	<groupId>be.fvde.programming</groupId>
-	<artifactId>spring-boot-ci-cd-setup</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>spring-boot-ci-cd-setup</name>
-	<description>Demo project for Spring Boot</description>
-	<url/>
-	<licenses>
-		<license/>
-	</licenses>
-	<developers>
-		<developer/>
-	</developers>
-	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
-	</scm>
-	<properties>
-		<java.version>25</java.version>
-		<sentry.version>8.23.0</sentry.version>
-		<spring-cloud.version>2025.0.0</spring-cloud.version>
-		<spring-modulith.version>1.4.3</spring-modulith.version>
-	</properties>
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-cache</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-integration</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-oauth2-authorization-server</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-oauth2-client</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-validation</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-webflux</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>io.micrometer</groupId>
-			<artifactId>micrometer-tracing-bridge-brave</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>io.sentry</groupId>
-			<artifactId>sentry-spring-boot-starter-jakarta</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>io.zipkin.reporter2</groupId>
-			<artifactId>zipkin-reporter-brave</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.flywaydb</groupId>
-			<artifactId>flyway-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.flywaydb</groupId>
-			<artifactId>flyway-database-postgresql</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-openfeign</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.integration</groupId>
-			<artifactId>spring-integration-http</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.integration</groupId>
-			<artifactId>spring-integration-jpa</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.integration</groupId>
-			<artifactId>spring-integration-webflux</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.modulith</groupId>
-			<artifactId>spring-modulith-starter-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.modulith</groupId>
-			<artifactId>spring-modulith-starter-jpa</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-messaging</artifactId>
-		</dependency>
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.5.6</version>
+    <relativePath/>
+    <!-- lookup parent from repository -->
+  </parent>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-docker-compose</artifactId>
-			<scope>runtime</scope>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.micrometer</groupId>
-			<artifactId>micrometer-registry-datadog</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.micrometer</groupId>
-			<artifactId>micrometer-registry-dynatrace</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.micrometer</groupId>
-			<artifactId>micrometer-registry-prometheus</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.modulith</groupId>
-			<artifactId>spring-modulith-actuator</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.modulith</groupId>
-			<artifactId>spring-modulith-observability</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-configuration-processor</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-testcontainers</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.projectreactor</groupId>
-			<artifactId>reactor-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.rest-assured</groupId>
-			<artifactId>spring-web-test-client</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-contract-stub-runner</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-contract-verifier</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.integration</groupId>
-			<artifactId>spring-integration-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.modulith</groupId>
-			<artifactId>spring-modulith-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.restdocs</groupId>
-			<artifactId>spring-restdocs-mockmvc</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.testcontainers</groupId>
-			<artifactId>junit-jupiter</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.testcontainers</groupId>
-			<artifactId>postgresql</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>${spring-cloud.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.modulith</groupId>
-				<artifactId>spring-modulith-bom</artifactId>
-				<version>${spring-modulith.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-			<dependency>
-				<groupId>io.sentry</groupId>
-				<artifactId>sentry-bom</artifactId>
-				<version>${sentry.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
+  <groupId>be.fvde.programming</groupId>
+  <artifactId>spring-boot-ci-cd-setup</artifactId>
+  <version>${revision}</version>
+  <name>spring-boot-ci-cd-setup</name>
+  <description>Demo project for Spring Boot</description>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<annotationProcessorPaths>
-						<path>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</path>
-						<path>
-							<groupId>org.springframework.boot</groupId>
-							<artifactId>spring-boot-configuration-processor</artifactId>
-						</path>
-					</annotationProcessorPaths>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.cyclonedx</groupId>
-				<artifactId>cyclonedx-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-contract-maven-plugin</artifactId>
-				<version>4.3.0</version>
-				<extensions>true</extensions>
-				<configuration>
-					<testFramework>JUNIT5</testFramework>
-					<testMode>WEBTESTCLIENT</testMode>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.asciidoctor</groupId>
-				<artifactId>asciidoctor-maven-plugin</artifactId>
-				<version>2.2.1</version>
-				<executions>
-					<execution>
-						<id>generate-docs</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>process-asciidoc</goal>
-						</goals>
-						<configuration>
-							<backend>html</backend>
-							<doctype>book</doctype>
-						</configuration>
-					</execution>
-				</executions>
-				<dependencies>
-					<dependency>
-						<groupId>org.springframework.restdocs</groupId>
-						<artifactId>spring-restdocs-asciidoctor</artifactId>
-						<version>${spring-restdocs.version}</version>
-					</dependency>
-				</dependencies>
-			</plugin>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+  <url/>
+  <licenses>
+    <license/>
+  </licenses>
+  <developers>
+    <developer/>
+  </developers>
+  <scm>
+    <connection/>
+    <developerConnection/>
+    <tag/>
+    <url/>
+  </scm>
+
+  <properties>
+    <!-- General properties -->
+    <java.version>25</java.version>
+    <maven.compiler.source>${java.version}</maven.compiler.source>
+    <maven.compiler.target>${java.version}</maven.compiler.target>
+    <!--
+                  The ${spring-forge.version} controls the versioning for the project and is added to the
+                  Spring Boot build info, so it displays as part of Spring Boot Actuator's Info endpoint. This
+                  is set by the configuration of the spring-boot-maven-plugin in the spring-forge-starter-pom.
+                -->
+    <spring-boot-cicd.version>1.0.0-SNAPSHOT</spring-boot-cicd.version>
+    <revision>${spring-boot-cicd.version}</revision>
+
+    <sentry.version>8.23.0</sentry.version>
+    <spring-cloud.version>2025.0.0</spring-cloud.version>
+    <spring-modulith.version>1.4.3</spring-modulith.version>
+  </properties>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>${spring-cloud.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <!--			<dependency>-->
+      <!--				<groupId>org.springframework.modulith</groupId>-->
+      <!--				<artifactId>spring-modulith-bom</artifactId>-->
+      <!--				<version>${spring-modulith.version}</version>-->
+      <!--				<type>pom</type>-->
+      <!--				<scope>import</scope>-->
+      <!--			</dependency>-->
+      <!--			<dependency>-->
+      <!--				<groupId>io.sentry</groupId>-->
+      <!--				<artifactId>sentry-bom</artifactId>-->
+      <!--				<version>${sentry.version}</version>-->
+      <!--				<type>pom</type>-->
+      <!--				<scope>import</scope>-->
+      <!--			</dependency>-->
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <!--		<dependency>-->
+    <!--			<groupId>io.micrometer</groupId>-->
+    <!--			<artifactId>micrometer-tracing-bridge-brave</artifactId>-->
+    <!--		</dependency>-->
+    <!--		<dependency>-->
+    <!--			<groupId>io.sentry</groupId>-->
+    <!--			<artifactId>sentry-spring-boot-starter-jakarta</artifactId>-->
+    <!--		</dependency>-->
+    <!--		<dependency>-->
+    <!--			<groupId>io.zipkin.reporter2</groupId>-->
+    <!--			<artifactId>zipkin-reporter-brave</artifactId>-->
+    <!--		</dependency>-->
+    <dependency>
+      <groupId>org.flywaydb</groupId>
+      <artifactId>flyway-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.flywaydb</groupId>
+      <artifactId>flyway-database-postgresql</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <!--		<dependency>-->
+    <!--			<groupId>org.springframework.modulith</groupId>-->
+    <!--			<artifactId>spring-modulith-actuator</artifactId>-->
+    <!--			<scope>runtime</scope>-->
+    <!--		</dependency>-->
+    <!--		<dependency>-->
+    <!--			<groupId>org.springframework.modulith</groupId>-->
+    <!--			<artifactId>spring-modulith-observability</artifactId>-->
+    <!--			<scope>runtime</scope>-->
+    <!--		</dependency>-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-configuration-processor</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-cache</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+    <!--		<dependency>-->
+    <!--			<groupId>org.springframework.boot</groupId>-->
+    <!--			<artifactId>spring-boot-starter-integration</artifactId>-->
+    <!--		</dependency>-->
+    <!--		<dependency>-->
+    <!--			<groupId>org.springframework.boot</groupId>-->
+    <!--			<artifactId>spring-boot-starter-oauth2-authorization-server</artifactId>-->
+    <!--		</dependency>-->
+    <!--		<dependency>-->
+    <!--			<groupId>org.springframework.boot</groupId>-->
+    <!--			<artifactId>spring-boot-starter-oauth2-client</artifactId>-->
+    <!--		</dependency>-->
+    <!--		<dependency>-->
+    <!--			<groupId>org.springframework.boot</groupId>-->
+    <!--			<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>-->
+    <!--		</dependency>-->
+    <!--		<dependency>-->
+    <!--			<groupId>org.springframework.boot</groupId>-->
+    <!--			<artifactId>spring-boot-starter-security</artifactId>-->
+    <!--		</dependency>-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-validation</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-webflux</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <!--		<dependency>-->
+    <!--			<groupId>io.micrometer</groupId>-->
+    <!--			<artifactId>micrometer-registry-datadog</artifactId>-->
+    <!--			<scope>runtime</scope>-->
+    <!--		</dependency>-->
+    <!--		<dependency>-->
+    <!--			<groupId>io.micrometer</groupId>-->
+    <!--			<artifactId>micrometer-registry-dynatrace</artifactId>-->
+    <!--			<scope>runtime</scope>-->
+    <!--		</dependency>-->
+    <!--		<dependency>-->
+    <!--			<groupId>io.micrometer</groupId>-->
+    <!--			<artifactId>micrometer-registry-prometheus</artifactId>-->
+    <!--			<scope>runtime</scope>-->
+    <!--		</dependency>-->
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <!--		<dependency>-->
+    <!--			<groupId>org.springframework.cloud</groupId>-->
+    <!--			<artifactId>spring-cloud-starter-openfeign</artifactId>-->
+    <!--		</dependency>-->
+    <!--		<dependency>-->
+    <!--			<groupId>org.springframework.integration</groupId>-->
+    <!--			<artifactId>spring-integration-http</artifactId>-->
+    <!--		</dependency>-->
+    <!--		<dependency>-->
+    <!--			<groupId>org.springframework.integration</groupId>-->
+    <!--			<artifactId>spring-integration-jpa</artifactId>-->
+    <!--		</dependency>-->
+    <!--		<dependency>-->
+    <!--			<groupId>org.springframework.integration</groupId>-->
+    <!--			<artifactId>spring-integration-webflux</artifactId>-->
+    <!--		</dependency>-->
+    <!--		<dependency>-->
+    <!--			<groupId>org.springframework.modulith</groupId>-->
+    <!--			<artifactId>spring-modulith-starter-core</artifactId>-->
+    <!--		</dependency>-->
+    <!--		<dependency>-->
+    <!--			<groupId>org.springframework.modulith</groupId>-->
+    <!--			<artifactId>spring-modulith-starter-jpa</artifactId>-->
+    <!--		</dependency>-->
+    <!--		<dependency>-->
+    <!--			<groupId>org.springframework.security</groupId>-->
+    <!--			<artifactId>spring-security-messaging</artifactId>-->
+    <!--		</dependency>-->
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-docker-compose</artifactId>
+      <scope>runtime</scope>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-testcontainers</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <!--		<dependency>-->
+    <!--			<groupId>io.projectreactor</groupId>-->
+    <!--			<artifactId>reactor-test</artifactId>-->
+    <!--			<scope>test</scope>-->
+    <!--		</dependency>-->
+    <!--		<dependency>-->
+    <!--			<groupId>io.rest-assured</groupId>-->
+    <!--			<artifactId>spring-web-test-client</artifactId>-->
+    <!--			<scope>test</scope>-->
+    <!--		</dependency>-->
+    <!--		<dependency>-->
+    <!--			<groupId>org.springframework.cloud</groupId>-->
+    <!--			<artifactId>spring-cloud-starter-contract-stub-runner</artifactId>-->
+    <!--			<scope>test</scope>-->
+    <!--		</dependency>-->
+    <!--		<dependency>-->
+    <!--			<groupId>org.springframework.cloud</groupId>-->
+    <!--			<artifactId>spring-cloud-starter-contract-verifier</artifactId>-->
+    <!--			<scope>test</scope>-->
+    <!--		</dependency>-->
+    <!--		<dependency>-->
+    <!--			<groupId>org.springframework.integration</groupId>-->
+    <!--			<artifactId>spring-integration-test</artifactId>-->
+    <!--			<scope>test</scope>-->
+    <!--		</dependency>-->
+    <!--		<dependency>-->
+    <!--			<groupId>org.springframework.modulith</groupId>-->
+    <!--			<artifactId>spring-modulith-starter-test</artifactId>-->
+    <!--			<scope>test</scope>-->
+    <!--		</dependency>-->
+    <!--		<dependency>-->
+    <!--			<groupId>org.springframework.restdocs</groupId>-->
+    <!--			<artifactId>spring-restdocs-mockmvc</artifactId>-->
+    <!--			<scope>test</scope>-->
+    <!--		</dependency>-->
+    <!--		<dependency>-->
+    <!--			<groupId>org.springframework.security</groupId>-->
+    <!--			<artifactId>spring-security-test</artifactId>-->
+    <!--			<scope>test</scope>-->
+    <!--		</dependency>-->
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>postgresql</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>com.diffplug.spotless</groupId>
+          <artifactId>spotless-maven-plugin</artifactId>
+          <version>3.0.0</version>
+        </plugin>
+        <plugin>
+          <groupId>com.rudikershaw.gitbuildhook</groupId>
+          <artifactId>git-build-hook-maven-plugin</artifactId>
+          <version>3.6.0</version>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-dependency-plugin</artifactId>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-failsafe-plugin</artifactId>
+          <!--                    <version>${maven-failsafe-plugin.version}</version>-->
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-source-plugin</artifactId>
+          <!--                    <version>${maven-source-plugin.version}</version>-->
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <!--                    <version>${maven-surefire-plugin.version}</version>-->
+        </plugin>
+
+        <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>0.8.14</version>
+        </plugin>
+        <plugin>
+          <groupId>org.openapitools</groupId>
+          <artifactId>openapi-generator-maven-plugin</artifactId>
+          <version>7.16.0</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    <plugins>
+
+      <plugin>
+        <groupId>com.diffplug.spotless</groupId>
+        <artifactId>spotless-maven-plugin</artifactId>
+        <configuration>
+          <java>
+            <importOrder/>
+            <removeUnusedImports/>
+            <toggleOffOn>
+              <off>@formatter:off</off>
+                            <on>@formatter:on</on>
+            </toggleOffOn>
+          </java>
+          <pom>
+            <includes>
+              <include>pom.xml</include>
+              <include>*/pom.xml</include>
+            </includes>
+            <sortPom>
+              <nrOfIndentSpace>2</nrOfIndentSpace>
+              <indentAttribute>schemaLocation</indentAttribute>
+              <expandEmptyElements>false</expandEmptyElements>
+              <sortProperties>false</sortProperties>
+              <sortModules>true</sortModules>
+              <sortDependencies>scope,groupId,artifactId</sortDependencies>
+              <sortDependencyExclusions>groupId,artifactId</sortDependencyExclusions>
+              <sortPlugins>groupId,artifactId</sortPlugins>
+            </sortPom>
+            <toggleOffOn>
+              <off>@formatter:off</off>
+                            <on>@formatter:on</on>
+            </toggleOffOn>
+          </pom>
+          <markdown>
+            <includes>
+              <include>**/*.md</include>
+            </includes>
+            <flexmark/>
+            <toggleOffOn>
+              <off>@formatter:off</off>
+                            <on>@formatter:on</on>
+            </toggleOffOn>
+          </markdown>
+          <formats>
+            <format>
+              <includes>
+                <include>.gitignore</include>
+              </includes>
+              <trimTrailingWhitespace/>
+              <endWithNewline/>
+              <indent>
+                <tabs>true</tabs>
+                <spacesPerTab>2</spacesPerTab>
+              </indent>
+              <toggleOffOn>
+                <off>@formatter:off</off>
+                                <on>@formatter:on</on>
+              </toggleOffOn>
+            </format>
+          </formats>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
+            </goals>
+            <phase>compile</phase>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.rudikershaw.gitbuildhook</groupId>
+        <artifactId>git-build-hook-maven-plugin</artifactId>
+        <configuration>
+          <gitConfig>
+            <core.hooksPath>.githooks</core.hooksPath>
+          </gitConfig>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>initialize</goal>
+              <goal>configure</goal>
+            </goals>
+            <phase>validate</phase>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+            </path>
+            <path>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-configuration-processor</artifactId>
+            </path>
+          </annotationProcessorPaths>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <!--
+                                Use goal that sets a property pointing to the artifact file for each project dependency.
+                                See https://maven.apache.org/plugins/maven-dependency-plugin/properties-mojo.html
+                                This allows the Maven Surefire and Failsafe plugins to resolve the Mockito agent jar.
+                              -->
+          <execution>
+            <goals>
+              <goal>properties</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <!--
+                                  Adds Mockito as agent to this plugin.
+                                  See https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+                                  With Java 17 this causes a warning to display saying this will be required with Java 21+.
+                                -->
+        <configuration>
+          <!--
+                                          @{argLine} preserves existing JVM args (e.g., JaCoCo).
+                                          ${org.mockito:mockito-core:jar} is resolved by dependency-plugin above.
+                                          -Xshare:off is optional (disables Class Data Sharing to avoid agent issues).
+                                        -->
+          <!--suppress UnresolvedMavenProperty -->
+          <argLine>@{argLine} -javaagent:${org.mockito:mockito-core:jar} -Xshare:off</argLine>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <!--
+                                  Adds Mockito as agent to this plugin.
+                                  See https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+                                  With Java 17 this causes a warning to display saying this will be required with Java 21+.
+                                -->
+        <configuration>
+          <!--
+                                          @{argLine} preserves existing JVM args (e.g., JaCoCo).
+                                          ${org.mockito:mockito-core:jar} is resolved by dependency-plugin above.
+                                          -Xshare:off is optional (disables Class Data Sharing to avoid agent issues).
+                                        -->
+          <!--suppress UnresolvedMavenProperty -->
+          <argLine>@{argLine} -javaagent:${org.mockito:mockito-core:jar} -Xshare:off</argLine>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>jacoco-prepare-agent</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>jacoco-report</id>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <!--			<plugin>-->
+      <!--				<groupId>org.cyclonedx</groupId>-->
+      <!--				<artifactId>cyclonedx-maven-plugin</artifactId>-->
+      <!--			</plugin>-->
+      <!--			<plugin>-->
+      <!--				<groupId>org.springframework.cloud</groupId>-->
+      <!--				<artifactId>spring-cloud-contract-maven-plugin</artifactId>-->
+      <!--				<version>4.3.0</version>-->
+      <!--				<extensions>true</extensions>-->
+      <!--				<configuration>-->
+      <!--					<testFramework>JUNIT5</testFramework>-->
+      <!--					<testMode>WEBTESTCLIENT</testMode>-->
+      <!--				</configuration>-->
+      <!--			</plugin>-->
+
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <excludes>
+            <exclude>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+            </exclude>
+          </excludes>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>build-info</goal>
+            </goals>
+            <configuration>
+              <additionalProperties>
+                <spring-boot-cicd-version>${spring-boot-cicd.version}</spring-boot-cicd-version>
+              </additionalProperties>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 
 </project>
