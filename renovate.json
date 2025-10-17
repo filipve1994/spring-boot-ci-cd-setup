@@ -1,6 +1,28 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended"
-  ]
+    "config:base"
+  ],
+  "branchPrefix": "renovate/",
+  "baseBranches": ["develop"],
+  "protectedBranches": ["master", "develop"],
+  "automerge": true,
+  "automergeType": "branch",
+  "requiredStatusChecks": ["CI / unit-tests", "CI / integration-tests"],
+  "packageRules": [
+    {
+      "updateTypes": ["minor", "patch"],
+      "automerge": true,
+      "automergeStrategy": "auto",
+      "automergeComment": "Automerged minor/patch dependency update (tests must pass)"
+    },
+    {
+      "updateTypes": ["major"],
+      "automerge": false,
+      "labels": ["major update"]
+    }
+  ],
+  "prConcurrentLimit": 5,
+  "prHourlyLimit": 2,
+  "timezone": "Europe/Brussels"
 }
