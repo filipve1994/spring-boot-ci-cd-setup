@@ -1,0 +1,312 @@
+openapi: 3.0.3
+info:
+  title: User Management API
+  description: API for managing users with full CRUD operations
+  version: 1.0.0
+servers:
+  - url: https://api.example.com/
+    description: Production server
+paths:
+  /users:
+    get:
+      summary: Get a list of users
+      description: Retrieve all users with optional filters, pagination, and sorting
+      parameters:
+        - name: limit
+          in: query
+          description: Maximum number of users to return
+          required: false
+          schema:
+            type: integer
+            example: 10
+        - name: offset
+          in: query
+          description: Number of users to skip
+          required: false
+          schema:
+            type: integer
+            example: 0
+        - name: sort
+          in: query
+          description: Sort by field (prepend '-' for descending)
+          required: false
+          schema:
+            type: string
+            example: "-createdAt"
+        - name: active
+          in: query
+          description: Filter active users
+          required: false
+          schema:
+            type: boolean
+            example: true
+      responses:
+        '200':
+          description: List of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+              examples:
+                sample:
+                  summary: Sample response
+                  value:
+                    - id: 1
+                      name: John Doe
+                      email: john@example.com
+                      active: true
+                      createdAt: "2025-10-17T12:00:00Z"
+                    - id: 2
+                      name: Jane Doe
+                      email: jane@example.com
+                      active: false
+                      createdAt: "2025-10-10T09:30:00Z"
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      summary: Create a new user
+      requestBody:
+        description: User object that needs to be added
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreate'
+            examples:
+              sample:
+                summary: Sample new user
+                value:
+                  name: Jane Doe
+                  email: jane@example.com
+                  active: true
+      responses:
+        '201':
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples:
+                sample:
+                  value:
+                    id: 2
+                    name: Jane Doe
+                    email: jane@example.com
+                    active: true
+                    createdAt: "2025-10-17T14:00:00Z"
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+  /users/{userId}:
+    get:
+      summary: Get user by ID
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: ID of the user to fetch
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '200':
+          description: User found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples:
+                sample:
+                  value:
+                    id: 1
+                    name: John Doe
+                    email: john@example.com
+                    active: true
+                    createdAt: "2025-10-17T12:00:00Z"
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+    put:
+      summary: Update user by ID
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      requestBody:
+        description: Updated user object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdate'
+            examples:
+              sample:
+                value:
+                  name: John Smith
+                  active: false
+      responses:
+        '200':
+          description: User updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples:
+                sample:
+                  value:
+                    id: 1
+                    name: John Smith
+                    email: john@example.com
+                    active: false
+                    createdAt: "2025-10-17T12:00:00Z"
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+
+    delete:
+      summary: Delete user by ID
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        '204':
+          description: User deleted successfully (No Content)
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: John Doe
+        email:
+          type: string
+          format: email
+          example: john@example.com
+        active:
+          type: boolean
+          example: true
+        createdAt:
+          type: string
+          format: date-time
+          example: "2025-10-17T12:00:00Z"
+    UserCreate:
+      type: object
+      required:
+        - name
+        - email
+      properties:
+        name:
+          type: string
+          example: Jane Doe
+        email:
+          type: string
+          format: email
+          example: jane@example.com
+        active:
+          type: boolean
+          default: true
+    UserUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          example: John Smith
+        email:
+          type: string
+          format: email
+          example: john.smith@example.com
+        active:
+          type: boolean
+          example: false
+
+  responses:
+    BadRequest:
+      description: Invalid input
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "Invalid request payload"
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "Unauthorized access"
+
+    Forbidden:
+      description: Permission denied
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "Forbidden: You do not have access"
+
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "User not found"
+
+    UnprocessableEntity:
+      description: Invalid data provided
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "Email format is invalid"
